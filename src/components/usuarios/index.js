@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
+import * as usuariosActions from "../../actions/usuariosActions";
 class Usuarios extends Component {
+    componentDidMount() {
+       this.props.traerTodos()
 
-//   componentDidMount() {
-//     this.getData();
-
-//   }
+    }
 
   getData = async () => {
     const result = await axios.get(
@@ -26,8 +26,9 @@ class Usuarios extends Component {
       </tr>
     ));
   render() {
+      console.log(this.props)
     return (
-      <React.Fragment >
+      <React.Fragment>
         <table className="tabla">
           <thead>
             <tr>
@@ -42,7 +43,8 @@ class Usuarios extends Component {
     );
   }
 }
-const mapStateToProps = (reducers)=>(
-    reducers.usuarioReducer
-);
-export default connect(mapStateToProps,{/*Actions*/ })(Usuarios);
+const mapStateToProps = reducers => reducers.usuarioReducer;
+export default connect(
+  mapStateToProps,
+  usuariosActions
+)(Usuarios);
