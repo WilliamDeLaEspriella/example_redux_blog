@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { connect } from "react-redux";
 import * as usuariosActions from "../../actions/usuariosActions";
 class Usuarios extends Component {
@@ -8,15 +7,15 @@ class Usuarios extends Component {
 
     }
 
-  getData = async () => {
-    const result = await axios.get(
-      "https://jsonplaceholder.typicode.com/users"
-    );
-    this.setState({
-      usuarios: result.data
-    });
-    // console.log(result);
-  };
+//   getData = async () => {
+//     const result = await axios.get(
+//       "https://jsonplaceholder.typicode.com/users"
+//     );
+//     this.setState({
+//       usuarios: result.data
+//     });
+//     // console.log(result);
+//   };
   ponerFilas = () =>
     this.props.usuarios.map(usuario => (
       <tr key={usuario.id}>
@@ -26,7 +25,6 @@ class Usuarios extends Component {
       </tr>
     ));
   render() {
-      console.log(this.props)
     return (
       <React.Fragment>
         <table className="tabla">
