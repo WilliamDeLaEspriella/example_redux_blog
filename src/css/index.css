@@ -18,12 +18,20 @@
   font-size: 20px;
 }
 
-#menu a{
+#menu a {
   color: white;
   padding-right: 50px;
-
 }
 
-body{
-  margin: 0
+body {
+  margin: 0;
+  background-color: aqua;
+}
+
+.center {
+  text-align: center;
+}
+
+.rojo {
+  color: red;
 }
