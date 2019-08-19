@@ -1,29 +1,31 @@
 import React, { Component } from "react";
-
+import axios from "axios";
+import { async } from "q";
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      usuarios: [
-        {
-          nombre: "william",
-          email: "expor.gmail.com",
-          enlace: "fbind.com"
-        },
-        {
-          nombre: "gaia",
-          email: "gaia.gmail.com",
-          enlace: "gaiabind.com"
-        }
-      ]
-    };
+  state = {
+    usuarios: []
+  };
+
+  componentDidMount() {
+    this.getData();
+
   }
+
+  getData = async () => {
+    const result = await axios.get(
+      "https://jsonplaceholder.typicode.com/users"
+    );
+    this.setState({
+      usuarios: result.data
+    });
+    // console.log(result);
+  };
   ponerFilas = () =>
     this.state.usuarios.map(usuario => (
-      <tr>
-        <td>{usuario.nombre}</td>
+      <tr key={usuario.id}>
+        <td>{usuario.name}</td>
+        <td>{usuario.username}</td>
         <td>{usuario.email}</td>
-        <td>{usuario.enlace}</td>
       </tr>
     ));
   render() {
@@ -32,9 +34,9 @@ class App extends Component {
         <table className="tabla">
           <thead>
             <tr>
-              <th>nombre</th>
-              <th>correo</th>
-              <th>enlace</th>
+              <th>name</th>
+              <th>usermame</th>
+              <th>email</th>
             </tr>
           </thead>
           <tbody>{this.ponerFilas()}</tbody>
