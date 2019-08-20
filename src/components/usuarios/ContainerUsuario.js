@@ -1,12 +1,18 @@
 import React from "react";
-import {connect} from 'react-redux'
-const ContainerUsuario = (props) => {
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+const ContainerUsuario = props => {
   const ponerFilas = () =>
-    props.usuarios.map(usuario => (
+    props.usuarios.map((usuario, key) => (
       <tr key={usuario.id}>
         <td>{usuario.name}</td>
         <td>{usuario.username}</td>
         <td>{usuario.email}</td>
+        <td>
+          <Link to={`/publicaciones/${key}`}>
+            <div className="eye-solid icon" />
+          </Link>
+        </td>
       </tr>
     ));
 
@@ -26,6 +32,4 @@ const ContainerUsuario = (props) => {
   );
 };
 const mapStateToProps = reducers => reducers.usuarioReducer;
-export default connect(
-    mapStateToProps
-  )(ContainerUsuario);
+export default connect(mapStateToProps)(ContainerUsuario);
