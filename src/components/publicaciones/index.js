@@ -1,14 +1,28 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import * as usuariosActions from "../../actions/usuariosActions";
+import * as publicacionesActions from "../../actions/publicacionesActions";
+import Spinner from '../general/Spinner';
+import Fatal from '../general/Fatal';
 class Publicaciones extends Component {
     componentDidMount(){
-        if(!this.props.usuarios.length){
+        if(!this.props.usuarioReducer.usuarios.length){
             this.props.traerTodos()
+            this.props.traerPublicaciones()
         }
     }
     render() {
-        console.log(this.props.usuarios)
+        console.log(this.props)
+        if (this.props.cargando) {
+            return (
+              <center>
+                <Spinner />
+              </center>
+            );
+          }
+          if (this.props.error) {
+            return <Fatal error={this.props.error} />;
+          }
         return (
             <div>
                 <h1>Pulicaciones de</h1>
@@ -18,8 +32,13 @@ class Publicaciones extends Component {
     }
 }
 
-const mapStateToProps = reducers => reducers.usuarioReducer;
+const mapStateToProps = ({usuarioReducer,publicaionesReducer}) => {
+    return{usuarioReducer,publicaionesReducer}};
+const mapDispacherToPorps={
+    ...usuariosActions,
+    ...publicacionesActions
+}
 export default connect(
   mapStateToProps,
-  usuariosActions
+  mapDispacherToPorps
 )(Publicaciones);
